@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "facebook_posts",
+  "info": {
+    "singularName": "facebook-post",
+    "pluralName": "facebook-posts",
+    "displayName": "Facebook post",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "message": {
+      "type": "string"
+    },
+    "permalink": {
+      "type": "string"
+    },
+    "postId": {
+      "type": "text"
+    }
+  }
+}

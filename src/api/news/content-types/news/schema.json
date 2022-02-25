@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "newsall",
+  "info": {
+    "singularName": "news",
+    "pluralName": "newsall",
+    "displayName": "News"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "richtext"
+    }
+  }
+}

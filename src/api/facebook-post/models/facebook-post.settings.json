@@ -1,0 +1,24 @@
+{
+  "connection": "default",
+  "collectionName": "facebook-posts",
+  "info": {
+    "name": "facebook-post",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "postId": {
+      "type": "string"
+    },
+    "Message": {
+      "type": "string"
+    },
+    "permalink": {
+      "type": "string"
+    }
+  }
+}
