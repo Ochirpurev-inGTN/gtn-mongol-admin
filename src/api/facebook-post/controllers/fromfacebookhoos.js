@@ -14,10 +14,7 @@ module.exports = {
     next();
   },
   async fromFacebookHook(ctx, next) {
-    console.log("ctx body == ", ctx.request.body);
-    console.log("--------");
-    const changes = ctx.request.body?.changes;
-    console.log("changes array ===", JSON.stringify(changes));
+    console.log("ctx body == ",JSON.stringify(ctx.request.body));
     ctx.body = "Ok";
     next();
   },
