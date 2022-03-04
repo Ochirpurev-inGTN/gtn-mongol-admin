@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 module.exports = {
   async fromFacebookHookVerfication(ctx, next) {
     // console.log("ctx query == ", ctx.request.query);
@@ -13,7 +15,10 @@ module.exports = {
   },
   async fromFacebookHook(ctx, next) {
     console.log("ctx body == ", ctx.request.body);
-    ctx.body = "fb body";
+    console.log("--------");
+    const changes = ctx.request.body?.changes;
+    console.log("changes array ===", JSON.stringify(changes));
+    ctx.body = "Ok";
     next();
   },
 };
