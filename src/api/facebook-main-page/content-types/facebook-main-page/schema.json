@@ -1,11 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "facebook_posts",
+  "collectionName": "facebook_main_pages",
   "info": {
-    "singularName": "facebook-post",
-    "pluralName": "facebook-posts",
-    "displayName": "Facebook surgalt page",
-    "description": ""
+    "singularName": "facebook-main-page",
+    "pluralName": "facebook-main-pages",
+    "displayName": "Facebook main page"
   },
   "options": {
     "draftAndPublish": true
@@ -13,13 +12,13 @@
   "pluginOptions": {},
   "attributes": {
     "message": {
-      "type": "text"
+      "type": "string"
     },
     "permalink": {
       "type": "string"
     },
     "postId": {
-      "type": "text"
+      "type": "string"
     },
     "created_time": {
       "type": "string"
