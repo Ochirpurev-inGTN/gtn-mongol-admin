@@ -26,17 +26,20 @@ module.exports = {
             const { data } = await axios.get(
               `https://graph.facebook.com/v13.0/${pageId}/feed?fields=permalink_url,message,created_time&limit=1&access_token=${surgalPageToken}`
             );
-            const entry = await strapi.db
-              .query("api::facebook-post.facebook-post")
-              .create({
-                data: {
-                  postId: data.data[0],
-                  message: data.data[0].message.slice(0, 100),
-                  permalink: data.data[0].permalink_url,
-                  created_time: data.data[0].created_time,
-                },
-              });
-            console.log("my entry  in surgal  === ", entry);
+            if (data) {
+              const entry = await strapi.db
+                .query("api::facebook-post.facebook-post")
+                .create({
+                  data: {
+                    postId: data.data[0].id,
+                    message: data.data[0].message?.slice(0, 100),
+                    permalink: data.data[0].permalink_url,
+                    created_time: data.data[0].created_time,
+                    publishedAt: Date.now()
+                  },
+                });
+              console.log("my entry  in surgal  === ", entry);
+            }
           }
           break;
         case process.env.PAGE_ID_MAIN_PAGE:
@@ -44,17 +47,20 @@ module.exports = {
             const { data } = await axios.get(
               `https://graph.facebook.com/v13.0/${pageId}/feed?fields=permalink_url,message,created_time&limit=1&access_token=${mainPageToken}`
             );
-            const entry = await strapi.db
-              .query("api::facebook-main-page.facebook-main-page")
-              .create({
-                data: {
-                  postId: data.data[0],
-                  message: data.data[0].message?.slice(0, 100),
-                  permalink: data.data[0].permalink_url,
-                  created_time: data.data[0].created_time,
-                },
-              });
-            console.log("my entry in main === ", entry);
+            if (data) {
+              const entry = await strapi.db
+                .query("api::facebook-main-page.facebook-main-page")
+                .create({
+                  data: {
+                    postId: data.data[0].id,
+                    message: data.data[0].message?.slice(0, 100),
+                    permalink: data.data[0].permalink_url,
+                    created_time: data.data[0].created_time,
+                    publishedAt: Date.now()
+                  },
+                });
+              console.log("my entry in main === ", entry);
+            }
           }
           break;
         default: {

@@ -23,11 +23,12 @@ const HomePage = () => {
       <button
         onClick={() => btnFetchHandler()}
         style={{
-          background: "lime",
-          paddingLeft: "3px",
-          paddingRight: "3px",
-          paddingTop: "2px",
-          paddingBottom: "2px ",
+          background: "#7B7B7B",
+          paddingLeft: "10px",
+          paddingRight: "10px",
+          paddingTop: "6px",
+          paddingBottom: "6px ",
+          color: "white",
         }}
       >
         {" "}
