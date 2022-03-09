@@ -13,6 +13,69 @@ module.exports = {
     }
     next();
   },
+  async fetchPostsFromFacebook(ctx, next) {
+    const savePostsToDB = async (postsData) => {
+      await strapi.db
+        .query("api::facebook-post.facebook-post")
+        .createMany({
+          data: postsData.map((post) => {
+            return {
+              postId: post.id,
+              message: post.message?.slice(0, 100),
+              permalink: post.permalink_url,
+              created_time: post.created_time,
+              publishedAt: Date.now(),
+            };
+          }),
+        })
+        .then((data) => {
+          console.log("my new entries in surgalt page is === ", data);
+        })
+        .catch((err) =>
+          console.log("error in fetchPostsFromFacebook === ", err)
+        );
+    };
+    // console.log("fetchPostsFromFacebook controller started");
+    const surgalPageToken = process.env.PAGE_TOKEN_SURGALT;
+    const pageId = process.env.PAGE_ID_SURGALT;
+    const entries = await strapi.db
+      .query("api::facebook-post.facebook-post")
+      .findMany({ limit: 10 });
+    const { data } = await strapi
+      .service("plugin::gtnfacebook.myService")
+      .getFacebookPosts(pageId, surgalPageToken, 10);
+
+    // console.log("my posts in: fetchPostsFromFacebook() === ", data);
+    // console.log("my entries: fetchPostsFromFacebook() === ", entries);
+    if (entries && data) {
+      const tempNewPosts = data;
+      entries.map((oldPost) => {
+        // console.log("my old post == ", oldPost);
+
+        const oldPostIndex = tempNewPosts.findIndex(
+          ({ id }) => id === oldPost.postId
+        );
+        // console.log("my index === ", oldPostIndex);
+        if (oldPostIndex !== -1) {
+          tempNewPosts.splice(oldPostIndex, 1);
+        }
+        // console.log("my oldPostIndex === ", oldPostIndex);
+      });
+
+      // console.log("my new array === ", tempNewPosts);
+      if (!tempNewPosts) {
+        return;
+      } else if (tempNewPosts) {
+        savePostsToDB(tempNewPosts);
+        return;
+      }
+    } else if (data) {
+      savePostsToDB(data);
+      return;
+    } else {
+      return null;
+    }
+  },
   async fromFacebookHook(ctx, next) {
     ctx.body = "Ok";
     console.log("ctx body == ", JSON.stringify(ctx.request.body));
@@ -35,7 +98,7 @@ module.exports = {
                     message: data.data[0].message?.slice(0, 100),
                     permalink: data.data[0].permalink_url,
                     created_time: data.data[0].created_time,
-                    publishedAt: Date.now()
+                    publishedAt: Date.now(),
                   },
                 });
               console.log("my entry  in surgal  === ", entry);
@@ -56,7 +119,7 @@ module.exports = {
                     message: data.data[0].message?.slice(0, 100),
                     permalink: data.data[0].permalink_url,
                     created_time: data.data[0].created_time,
-                    publishedAt: Date.now()
+                    publishedAt: Date.now(),
                   },
                 });
               console.log("my entry in main === ", entry);
@@ -72,47 +135,3 @@ module.exports = {
     next();
   },
 };
-
-/**
- * if (posts) {
-//     const posts = result.data.data;
-//     return posts;
-//     // await strapi.db
-//     //   .query("api::facebook-post.facebook-post")
-//     //   .createMany({
-//     //     data: posts.map((post) => {
-//     //       return {
-//     //         postId: post.id,
-//     //         message: post.message.slice(0, 100),
-//     //         permalink: post.permalink_url,
-//     //       };
-//     //     }),
-//     //   })
-//     //   .then((data) => {
-//     //     console.log("data from db query === ", data);
-//     //   });
-//   }
- */
-
-//  {
-//    "object":"page",
-//  "entry":
-//   [{
-//    "id":"0",
-//    "time":1646361275,
-//    "changes":
-//       [{
-//        "field":"feed",
-//        "value":
-//           {
-//               "item":"status",
-//               "post_id":"44444444_444444444",
-//               "verb":"add",
-//               "published":1,
-//               "created_time":1646361275,
-//               "message":"Example post content.",
-//               "from":{"name":"Test Page","id":"1067280970047460"}
-//           }
-//       }]
-//   }]
-// }
