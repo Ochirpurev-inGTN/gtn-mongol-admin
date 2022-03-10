@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "description": "This is the description of the plugin.",
   "strapi": {
-    "name": "gtnfacebook",
-    "description": "Description of gtnfacebook plugin",
+    "name": "GTN-facebook",
+    "description": "Fetch posts from Facebook pages",
     "kind": "plugin"
   },
   "dependencies": {},

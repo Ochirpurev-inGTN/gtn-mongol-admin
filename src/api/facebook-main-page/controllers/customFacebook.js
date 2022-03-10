@@ -29,7 +29,7 @@ module.exports = {
           }),
         })
         .then((data) => {
-          console.log("my new entries in surgalt page is === ", data);
+          console.log("my new entries in main page === ", data);
         })
         .catch((err) =>
           console.log("error in fetchPostsFromFacebook === ", err)

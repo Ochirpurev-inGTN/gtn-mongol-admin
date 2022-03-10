@@ -1,18 +1,26 @@
 module.exports = [
   {
-    method: 'GET',
-    path: '/',
-    handler: 'myController.index',
+    method: "GET",
+    path: "/",
+    handler: "myController.index",
     config: {
       policies: [],
     },
   },
   {
-    method: 'GET',
-    path: '/fetchposts',
-    handler: 'plugin::gtnfacebook.facebookController.miniiAction',
+    method: "GET",
+    path: "/fetchpostsmain",
+    handler: "plugin::gtnfacebook.facebookController.fetchMainPosts",
     config: {
-        // auth: false
-    }
-}
+      // auth: false
+    },
+  },
+  {
+    method: "GET",
+    path: "/fetchpostssurgalt",
+    handler: "plugin::gtnfacebook.facebookController.fetchSurgaltPosts",
+    config: {
+      // auth: false
+    },
+  },
 ];
