@@ -6,7 +6,7 @@ module.exports = {
       // console.log("1-6 udurt 11:15 tsagt hevlegdene. and now === ", Date());
     },
     options: {
-      rule: "0 0 20  * * 1-6",
+      rule: "0 20 9  * * 1-6",
       // rule: "*/10 *  *  * * *",
       tz: "Asia/Ulaanbaatar",
     },
