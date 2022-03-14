@@ -15,10 +15,11 @@ module.exports = {
   },
   async fetchPostsFromFacebook(ctx, next) {
     const savePostsToDB = async (postsData) => {
+      const newData = [...postsData]
       await strapi.db
         .query("api::facebook-main-page.facebook-main-page")
         .createMany({
-          data: postsData.map((post) => {
+          data: newData.reverse().map((post) => {
             return {
               postId: post.id,
               message: post.message?.slice(0, 100),
@@ -45,8 +46,6 @@ module.exports = {
       .service("plugin::gtnfacebook.myService")
       .getFacebookPosts(pageId, pageTokenMain, 10);
 
-    // console.log("my posts in: fetchPostsFromFacebook() === ", data);
-    // console.log("my entries: fetchPostsFromFacebook() === ", entries);
     if (entries && data) {
       const tempNewPosts = data;
       entries.map((oldPost) => {
