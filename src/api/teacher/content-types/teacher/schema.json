@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "blogs",
+  "collectionName": "teachers",
   "info": {
-    "singularName": "blog",
-    "pluralName": "blogs",
-    "displayName": "Blog",
+    "singularName": "teacher",
+    "pluralName": "teachers",
+    "displayName": "Teacher",
     "description": ""
   },
   "options": {
@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "Title": {
+    "name": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -24,8 +24,8 @@
         }
       }
     },
-    "Content": {
-      "type": "richtext",
+    "about": {
+      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true

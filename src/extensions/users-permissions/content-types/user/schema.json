@@ -62,12 +62,6 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
-    },
-    "zuragtai_header": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::zuragtai-header.zuragtai-header",
-      "inversedBy": "users_permissions_user"
     }
   }
 }

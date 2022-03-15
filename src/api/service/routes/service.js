@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * news router.
+ * service router.
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::news.news');
+module.exports = createCoreRouter('api::service.service');

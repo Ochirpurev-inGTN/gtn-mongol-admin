@@ -41,10 +41,10 @@ module.exports = {
     const pageId = process.env.PAGE_ID_MAIN_PAGE;
     const entries = await strapi.db
       .query("api::facebook-main-page.facebook-main-page")
-      .findMany({ limit: 10 });
+      .findMany({ limit: 15, select: ['postId', 'id'], orderBy: {id: "Desc"} });
     const { data } = await strapi
       .service("plugin::gtnfacebook.myService")
-      .getFacebookPosts(pageId, pageTokenMain, 10);
+      .getFacebookPosts(pageId, pageTokenMain, 5);
 
     if (entries && data) {
       const tempNewPosts = data;

@@ -45,7 +45,7 @@ module.exports = {
       // console.log('my 10 entries === ', entries);
     const { data } = await strapi
       .service("plugin::gtnfacebook.myService")
-      .getFacebookPosts(pageId, surgalPageToken, 10);
+      .getFacebookPosts(pageId, surgalPageToken, 5);
 
     if (entries && data) {
       const tempNewPosts = data;
