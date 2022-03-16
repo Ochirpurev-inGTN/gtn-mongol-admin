@@ -44,7 +44,7 @@ module.exports = {
       .findMany({ limit: 15, select: ['postId', 'id'], orderBy: {id: "Desc"} });
     const { data } = await strapi
       .service("plugin::gtnfacebook.myService")
-      .getFacebookPosts(pageId, pageTokenMain, 5);
+      .getFacebookPosts(pageId, pageTokenMain, 10);
 
     if (entries && data) {
       const tempNewPosts = data;
